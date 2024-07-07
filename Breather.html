@@ -23,7 +23,10 @@
         let minBreathe = 3;     // Min number of seconds to inhale or exhale
 
 
-        document.addEventListener("DOMContentLoaded", () => {
+        //document.addEventListener("DOMContentLoaded", () => {
+        // Maybe the "load" event will assure that our click sound has gotten
+        // loaded?
+        window.addEventListener("load", () => {
             startBtn = document.querySelector('#start');
             stopBtn = document.querySelector('#stop');
             output = document.querySelector('#output');
