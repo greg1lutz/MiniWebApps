@@ -12,30 +12,42 @@
 
     <script type="text/ecmascript">
 
-
-
-        // Get a sound file for our click sound
-        let klik = new Audio("https://www.soundjay.com/buttons/button-15.wav")
+        var klikLoaded = false;
+        var pageLoaded = false;
+        var gotGoing = false;
+            
         let startBtn,
             stopBtn,
             output;
         let maxBreathe = 12;    // Max number of seconds to inhale or exhale
         let minBreathe = 3;     // Min number of seconds to inhale or exhale
 
+        // Get a sound file for our click sound
+        let klik = new Audio("https://www.soundjay.com/buttons/button-15.wav")
+        klik.addEventListener("canplaythrough", () => {
+            if (pageLoaded)
+                getGoing();
+            klikLoaded = true;
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            if (klikLoaded)
+                getGoing();
+            pageLoaded = true;
+        });
 
-        //document.addEventListener("DOMContentLoaded", () => {
-        // Maybe the "load" event will assure that our click sound has gotten
-        // loaded?
-        window.addEventListener("load", () => {
+        function getGoing() {
+            if (gotGoing)
+                return;
+            gotGoing = true;
             startBtn = document.querySelector('#start');
             stopBtn = document.querySelector('#stop');
             output = document.querySelector('#output');
-            output.textContent = "---"
+            output.textContent = "\xA0"
             next = document.querySelector('#next');
 
             startBtn.addEventListener('click', go);
             stopBtn.addEventListener('click', stopOutput);
-        })
+        }
 
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
@@ -49,6 +61,7 @@
             //next.style.color = "red";
             next.textContent = "Next: in for " + nextSeconds;
 
+            klik.play();
             await sleep(1000);
 
             while (thisSeries == lastSeries) {
