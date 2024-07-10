@@ -79,13 +79,13 @@
                     }
                     await sleep(1000);
                 }
-                next.textContent = " ";
+                next.textContent = "\xA0";
             }
         }
 
         const stopOutput = () => {
             ++lastSeries; // This will interrupt the animation.
-            output.textContent = "---"
+            output.textContent = "\xA0"
         }
 
         //  Return a random integer between minBreathe and maxBreathe inclusive
@@ -110,8 +110,8 @@
                 <button id="stop" class="btn btn-sm btn-info">Stop</button>
             </div>
             <div class="mt-3">
-                <p id="output"></p>
                 <p id="next" style="font-size:small;"></p>
+                <p id="output"></p>
             </div>
         </div>
     </div>
